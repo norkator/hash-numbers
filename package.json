@@ -1,0 +1,9 @@
+{
+  "name": "hash-numbers",
+  "version": "1.0.0",
+  "main": "src/hash-numbers",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon"
+  }
+}
