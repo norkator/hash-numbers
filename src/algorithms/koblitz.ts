@@ -18,23 +18,15 @@ export function retCharNumVal(char: any): number {
  * @constructor
  */
 export function KoblitzEncode(value: number, salt: string): number {
-    // salt = salt.toUpperCase();
-    // const chars = salt.split("").reverse();
+    salt = salt.toUpperCase();
+    const chars = salt.split("").reverse();
     
-    // var sum = 0;
-    // chars.forEach((c, i) => {
-    //     var n = c.charCodeAt(0) - 65;
-    //     sum = sum + (n * Math.pow(36,i));
-    // });
-    // return sum + value;
-
-    console.log(retCharNumVal('1'));
-    console.log(retCharNumVal('2'));
-    console.log(retCharNumVal('9'));
-    console.log(retCharNumVal('0'));
-    // retCharNumVal('B');
-    // retCharNumVal('0');
-    return 0;
+    var sum = 0;
+    chars.forEach((c, i) => {
+        var n = retCharNumVal(c);
+        sum = sum + (n * Math.pow(36,i));
+    });
+    return sum + value;
 }
 
 
@@ -50,7 +42,7 @@ export function KoblitzDecode(value: number, salt: string): number {
     
     var sum = 0;
     chars.forEach((c, i) => {
-        var n = c.charCodeAt(0) - 65;
+        var n = retCharNumVal(c);
         sum = sum + (n * Math.pow(36,i));
     });
     return value - sum;

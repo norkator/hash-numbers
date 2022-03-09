@@ -8,7 +8,6 @@ const params: HashParamsInterface = {
 }
 const hashNumber = new HashNumbers(params);
 
-
 for (let i = 1; i < 10; i++) {
     const encoded = hashNumber.encode(i);
     const decoded = hashNumber.decode(encoded);
