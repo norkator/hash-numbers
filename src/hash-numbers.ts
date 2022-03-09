@@ -1,6 +1,6 @@
 'use strict'
 
-import {GetFix, SaltToCharCodeArray} from './utils';
+import {GetFix} from './utils';
 import {KoblitzDecode, KoblitzEncode} from './algorithms/koblitz';
 import {DefaultDecode, DefaultEncode} from './algorithms/default';
 
@@ -15,11 +15,9 @@ export interface HashParamsInterface {
 
 export class HashNumbers {
     private params: HashParamsInterface;
-    private readonly saltCharCodeArray: number[];
 
     constructor(params: HashParamsInterface) {
         this.params = params;
-        this.saltCharCodeArray = SaltToCharCodeArray(params.salt); // todo.. remove if never used
     }
 
     public encode(value: number): string {
