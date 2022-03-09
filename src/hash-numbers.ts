@@ -18,14 +18,14 @@ export class HashNumbers {
 
     constructor(params: HashParamsInterface) {
         this.params = params;
-        this.saltCharCodeArray = SaltToCharCodeArray(params.salt);
+        this.saltCharCodeArray = SaltToCharCodeArray(params.salt); // todo.. remove if never used
     }
 
     public encode(value: number): string {
         let result;
         switch (this.params.algorithm) {
             case 'KOBLITZ':
-                result = KoblitzEncode(value);
+                result = KoblitzEncode(value, this.params.salt);
                 break;
         }
         return GetFix(this.params.prefix) + result + GetFix(this.params.suffix);
@@ -35,7 +35,7 @@ export class HashNumbers {
         let n = Number(value); // todo... remove prefix, suffix first
         switch (this.params.algorithm) {
             case "KOBLITZ":
-                n = KoblitzDecode(n);
+                n = KoblitzDecode(n, this.params.salt);
                 break;
         }
         return n;
