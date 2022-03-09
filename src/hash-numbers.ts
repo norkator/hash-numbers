@@ -1,6 +1,7 @@
 'use strict'
 
 import {GetFix, SaltToCharCodeArray} from './utils';
+import {KoblitzDecode, KoblitzEncode} from './algorithms/koblitz';
 
 export type ALGORITHM = 'KOBLITZ';
 
@@ -21,17 +22,21 @@ export class HashNumbers {
     }
 
     public encode(value: number): string {
-        let r = value;
-        for (let i = 0; i < this.saltCharCodeArray.length; i++) {
-            r = r * this.saltCharCodeArray[i];
+        let result;
+        switch (this.params.algorithm) {
+            case 'KOBLITZ':
+                result = KoblitzEncode(value);
+                break;
         }
-        return GetFix(this.params.prefix) + r + GetFix(this.params.suffix);
+        return GetFix(this.params.prefix) + result + GetFix(this.params.suffix);
     }
 
     public decode(value: string): number {
-        let n = Number(value);
-        for (let i = this.saltCharCodeArray.length; i > 0; i--) {
-            n = n / this.saltCharCodeArray[i - 1];
+        let n = Number(value); // todo... remove prefix, suffix first
+        switch (this.params.algorithm) {
+            case "KOBLITZ":
+                n = KoblitzDecode(n);
+                break;
         }
         return n;
     }

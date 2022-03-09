@@ -1,9 +1,14 @@
 {
   "name": "hash-numbers",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "src/hash-numbers",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.15",
+    "ts-node": "10.7.0",
+    "typescript": "4.6.2"
   }
 }
