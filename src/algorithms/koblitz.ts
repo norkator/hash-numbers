@@ -1,4 +1,9 @@
-export function retCharNumVal(char: any): number {
+/**
+ * Returns numerical value for character
+ * @param char must be a character
+ * @constructor
+ */
+function retCharNumVal(char: any): number {
     if((/[a-z]/).test(char)){
         return char.charCodeAt(0) - 96;
     }
@@ -28,7 +33,6 @@ export function KoblitzEncode(value: number, salt: string): number {
     });
     return sum + value;
 }
-
 
 /**
  * Decoding method
