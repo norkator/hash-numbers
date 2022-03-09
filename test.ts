@@ -1,8 +1,8 @@
 import {HashNumbers, HashParamsInterface} from './src/hash-numbers'
 
 const params: HashParamsInterface = {
-    algorithm: 'KOBLITZ',
-    salt: 'Testing123',
+    algorithm: 'DEFAULT',
+    salt: 'Test123',
     prefix: '',
     suffix: ''
 }

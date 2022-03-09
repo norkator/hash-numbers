@@ -2,8 +2,9 @@
 
 import {GetFix, SaltToCharCodeArray} from './utils';
 import {KoblitzDecode, KoblitzEncode} from './algorithms/koblitz';
+import {DefaultDecode, DefaultEncode} from './algorithms/default';
 
-export type ALGORITHM = 'KOBLITZ';
+export type ALGORITHM = 'DEFAULT' | 'KOBLITZ';
 
 export interface HashParamsInterface {
     algorithm: ALGORITHM;
@@ -24,6 +25,9 @@ export class HashNumbers {
     public encode(value: number): string {
         let result;
         switch (this.params.algorithm) {
+            case 'DEFAULT':
+                result = DefaultEncode(value, this.params.salt);
+                break;
             case 'KOBLITZ':
                 result = KoblitzEncode(value, this.params.salt);
                 break;
@@ -34,6 +38,9 @@ export class HashNumbers {
     public decode(value: string): number {
         let n = Number(value); // todo... remove prefix, suffix first
         switch (this.params.algorithm) {
+            case "DEFAULT":
+                n = DefaultDecode(n, this.params.salt);
+                break;
             case "KOBLITZ":
                 n = KoblitzDecode(n, this.params.salt);
                 break;
