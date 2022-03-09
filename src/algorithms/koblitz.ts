@@ -1,5 +1,5 @@
 /**
- * Returns numerical value for character
+ * Returns numerical value for character (a-z,A-Z,0-9) => (1-26,27-52,53-62)
  * @param char must be a character
  * @constructor
  */
