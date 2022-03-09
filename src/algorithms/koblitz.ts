@@ -5,9 +5,15 @@
  * @constructor
  */
 export function KoblitzEncode(value: number, salt: string): number {
-
-
-    return 0;
+    salt = salt.toUpperCase();
+    const chars = salt.split("").reverse();
+    
+    var sum = 0;
+    chars.forEach((c, i) => {
+        var n = c.charCodeAt(0) - 65;
+        sum = sum + (n * Math.pow(36,i));
+    });
+    return sum + value;
 }
 
 
