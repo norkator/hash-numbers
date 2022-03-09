@@ -2,7 +2,10 @@
 
 import {GetFix, SaltToCharCodeArray} from './utils';
 
+export type ALGORITHM = 'KOBLITZ';
+
 export interface HashParamsInterface {
+    algorithm: ALGORITHM;
     salt: string;
     prefix?: string; // appended at beginning before number hash
     suffix?: string; // appended at the end after number hash
