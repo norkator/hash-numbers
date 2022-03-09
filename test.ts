@@ -2,12 +2,11 @@ import {HashNumbers, HashParamsInterface} from './src/hash-numbers'
 
 const params: HashParamsInterface = {
     algorithm: 'KOBLITZ',
-    salt: 'testing',
+    salt: 'Testing123',
     prefix: '',
     suffix: ''
 }
 const hashNumber = new HashNumbers(params);
-
 
 for (let i = 1; i < 10; i++) {
     const encoded = hashNumber.encode(i);
