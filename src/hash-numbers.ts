@@ -1,6 +1,6 @@
 'use strict'
 
-import {GetFix} from './utils';
+import {GetPrefixSuffix, RemovePrefixSuffix} from './utils';
 import {KoblitzArithematicEncode, KoblitzArithematicDecode} from './algorithms/koblitzarithematic';
 import {CRC32Decode, CRC32Encode} from './algorithms/crc32';
 import {SKoblitzEncode, SKoblitzDecode} from './algorithms/skoblitz';
@@ -38,11 +38,15 @@ export class HashNumbers {
                 result = ModInvEncode(value, Number(this.params.salt));
                 break;
         }
-        return GetFix(this.params.prefix) + result + GetFix(this.params.suffix);
+        return GetPrefixSuffix(this.params.prefix) + result + GetPrefixSuffix(this.params.suffix);
     }
 
     public decode(value: string): number {
-        let n = Number(value);
+        let n = RemovePrefixSuffix(
+            GetPrefixSuffix(this.params.prefix),
+            GetPrefixSuffix(this.params.suffix),
+            value
+        );
         switch (this.params.algorithm) {
             case "CRC32":
                 n = CRC32Decode(n, String(this.params.salt));
