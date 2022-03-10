@@ -2,7 +2,7 @@
 
 import {GetFix} from './utils';
 import {KoblitzArithematicEncode, KoblitzArithematicDecode} from './algorithms/koblitzarithematic';
-import {DefaultDecode, DefaultEncode} from './algorithms/default';
+import {CRC32Decode, CRC32Encode} from './algorithms/crc32';
 import {SKoblitzEncode, SKoblitzDecode} from './algorithms/skoblitz';
 import {ModInvDecode, ModInvEncode} from './algorithms/modinv';
 
@@ -26,7 +26,7 @@ export class HashNumbers {
         let result;
         switch (this.params.algorithm) {
             case 'CRC32':
-                result = DefaultEncode(value, String(this.params.salt));
+                result = CRC32Encode(value, String(this.params.salt));
                 break;
             case 'KOBLITZARITHEMATIC':
                 result = KoblitzArithematicEncode(value, String(this.params.salt));
@@ -42,10 +42,10 @@ export class HashNumbers {
     }
 
     public decode(value: string): number {
-        let n = Number(value); // todo... remove prefix, suffix first
+        let n = Number(value);
         switch (this.params.algorithm) {
             case "CRC32":
-                n = DefaultDecode(n, String(this.params.salt));
+                n = CRC32Decode(n, String(this.params.salt));
                 break;
             case "KOBLITZARITHEMATIC":
                 n = KoblitzArithematicDecode(n, String(this.params.salt));
@@ -54,7 +54,7 @@ export class HashNumbers {
                 n = SKoblitzDecode(n, String(this.params.salt));
                 break;
             case "MOD_INV":
-                n = ModInvDecode(n, Number(this.params.saltNum));
+                n = ModInvDecode(n, Number(this.params.salt));
                 break;
         }
         return n;
