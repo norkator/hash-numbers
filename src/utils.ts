@@ -25,18 +25,50 @@ export function RetCharNumVal(char: any): number {
 }
 
 /**
+ * Returns character value for number (1-26,27-52,53-62) => (a-z,A-Z,0-9)
+ * @param num must be a number
+ * @constructor
+ */
+export function RetNumCharVal(num: number): any {
+    if(num >= 1 && num <= 26){
+        return String.fromCharCode(num + 96); 
+    }
+    if(num >= 27 && num <= 52){
+        return String.fromCharCode(num + 38); 
+    }
+    if(num >= 53 && num <= 62){
+        return String.fromCharCode(num - 5); 
+    }
+    return 0;
+}
+
+/**
  * Returns koblitz encoding for a string
  * @param salt must be a string to encode
  * @constructor
  */
 export function KoblitzEncode(salt: string): number {
-    salt = salt.toUpperCase();
     const chars = salt.split("").reverse();
 
     let sum = 0;
     chars.forEach((c, i) => {
         const n = RetCharNumVal(c);
-        sum = sum + (n * Math.pow(36, i));
+        sum = sum + (n * Math.pow(63, i));
     });
     return sum;
+}
+
+/**
+ * Returns koblitz decoding for a string
+ * @param salt must be a string to encode
+ * @constructor
+ */
+export function KoblitzDecode(hash: number): string {
+    var plainSalt = '';
+    while(hash > 0){
+        var numVal = hash % 63;
+        plainSalt += RetNumCharVal(numVal);
+        hash = Math.floor(hash / 63);
+    }
+    return plainSalt.split('').reverse().join('');
 }

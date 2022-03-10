@@ -1,4 +1,4 @@
-import {KoblitzEncode} from '../utils';
+import {KoblitzDecode, KoblitzEncode} from '../utils';
 
 /**
  * Encoding method
@@ -7,11 +7,9 @@ import {KoblitzEncode} from '../utils';
  * @constructor
  */
 export function SKoblitzEncode(value: number, salt: string): number {
-    var pos = value % salt.length - 1;
-    var newSalt = salt.slice(0,pos) + value + salt.slice(pos);
-    console.log(newSalt);
-    console.log(KoblitzEncode(newSalt));
-    return 0;
+    var pos = value % salt.length;
+    var saltedValue = salt.slice(0,pos) + value + salt.slice(pos);
+    return KoblitzEncode(saltedValue);
 }
 
 /**
@@ -21,6 +19,17 @@ export function SKoblitzEncode(value: number, salt: string): number {
  * @constructor
  */
 export function SKoblitzDecode(value: number, salt: string): number {
+    var saltedValue = KoblitzDecode(value);
     
-    return 0;
+    var id = 0;
+    var a=0, b=0;
+    while(a<salt.length){
+        if(salt[a] == saltedValue[b]){
+            a++; b++;
+        } else {
+            id = id*10 + Number(saltedValue[b]);
+            b++;
+        }
+    }
+    return id;
 }

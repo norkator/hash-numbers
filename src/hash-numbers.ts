@@ -5,7 +5,7 @@ import {KoblitzArithematicEncode, KoblitzArithematicDecode} from './algorithms/k
 import {DefaultDecode, DefaultEncode} from './algorithms/default';
 import { SKoblitzEncode, SKoblitzDecode } from './algorithms/skoblitz';
 
-export type ALGORITHM = 'DEFAULT' | 'KOBLITZARITHEMATIC' | 'SKOBLITZ';
+export type ALGORITHM = 'DEFAULT' | 'KOBLITZARITHEMATIC' | 'SKR_KOBLITZ_ALGO';
 
 export interface HashParamsInterface {
     algorithm: ALGORITHM;
@@ -30,7 +30,7 @@ export class HashNumbers {
             case 'KOBLITZARITHEMATIC':
                 result = KoblitzArithematicEncode(value, this.params.salt);
                 break;
-            case 'SKOBLITZ':
+            case 'SKR_KOBLITZ_ALGO':
                 result = SKoblitzEncode(value, this.params.salt);
                 break;
         }
@@ -46,7 +46,7 @@ export class HashNumbers {
             case "KOBLITZARITHEMATIC":
                 n = KoblitzArithematicDecode(n, this.params.salt);
                 break;
-            case "SKOBLITZ":
+            case "SKR_KOBLITZ_ALGO":
                 n = SKoblitzDecode(n, this.params.salt)
                 break;
         }

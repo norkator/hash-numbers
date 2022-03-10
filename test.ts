@@ -1,15 +1,15 @@
 import {HashNumbers, HashParamsInterface} from './src/hash-numbers'
 
 const params: HashParamsInterface = {
-    algorithm: 'KOBLITZARITHEMATIC',
-    salt: 'Test123',
+    algorithm: 'SKR_KOBLITZ_ALGO',
+    salt: 'abcd',
     prefix: '',
     suffix: ''
 }
 const hashNumber = new HashNumbers(params);
 
-for (let i = 100; i < 110; i++) {
+for (let i = 1; i < 1000; i++) {
     const encoded = hashNumber.encode(i);
     const decoded = hashNumber.decode(encoded);
-    console.log(encoded + ' / ' + decoded);
+    console.log(encoded + ' / ' + decoded + ' /' + i);
 }
