@@ -4,12 +4,14 @@ import {GetFix} from './utils';
 import {KoblitzArithematicEncode, KoblitzArithematicDecode} from './algorithms/koblitzarithematic';
 import {DefaultDecode, DefaultEncode} from './algorithms/default';
 import { SKoblitzEncode, SKoblitzDecode } from './algorithms/skoblitz';
+import { ModInvDecode, ModInvEncode } from './algorithms/modinv';
 
-export type ALGORITHM = 'DEFAULT' | 'KOBLITZARITHEMATIC' | 'SKR_KOBLITZ_ALGO';
+export type ALGORITHM = 'DEFAULT' | 'KOBLITZARITHEMATIC' | 'SKR_KOBLITZ_ALGO' | 'MOD_INV';
 
 export interface HashParamsInterface {
     algorithm: ALGORITHM;
     salt: string;
+    saltNum: number;
     prefix?: string; // appended at beginning before number hash
     suffix?: string; // appended at the end after number hash
 }
@@ -33,6 +35,9 @@ export class HashNumbers {
             case 'SKR_KOBLITZ_ALGO':
                 result = SKoblitzEncode(value, this.params.salt);
                 break;
+            case 'MOD_INV':
+                result = ModInvEncode(value, this.params.saltNum);
+                break;
         }
         return GetFix(this.params.prefix) + result + GetFix(this.params.suffix);
     }
@@ -47,7 +52,10 @@ export class HashNumbers {
                 n = KoblitzArithematicDecode(n, this.params.salt);
                 break;
             case "SKR_KOBLITZ_ALGO":
-                n = SKoblitzDecode(n, this.params.salt)
+                n = SKoblitzDecode(n, this.params.salt);
+                break;
+            case "MOD_INV":
+                n = ModInvDecode(n, this.params.saltNum);
                 break;
         }
         return n;

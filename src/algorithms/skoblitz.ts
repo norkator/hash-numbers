@@ -6,10 +6,11 @@ import {KoblitzDecode, KoblitzEncode} from '../utils';
  * @param salt (seed) which can be anything
  * @constructor
  */
-export function SKoblitzEncode(value: number, salt: string): number {
+export function SKoblitzEncode(value: number, salt: string): string {
     var pos = value % salt.length;
     var saltedValue = salt.slice(0,pos) + value + salt.slice(pos);
-    return KoblitzEncode(saltedValue);
+    // console.log(saltedValue)
+    return KoblitzEncode(saltedValue).toLocaleString('fullwide', {useGrouping:false}) ;
 }
 
 /**
