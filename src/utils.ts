@@ -73,6 +73,12 @@ export function KoblitzDecode(hash: number): string {
     return plainSalt.split('').reverse().join('');
 }
 
+/**
+ * Returns gcd of both the numbers
+ * @param a must be a number
+ * @param b must be a number
+ * @constructor
+ */
 export function extgcd(a: number, b:number): any {
     if (a < b) {
         let tmp = extgcd(b, a);

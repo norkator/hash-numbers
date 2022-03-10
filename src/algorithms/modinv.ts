@@ -1,9 +1,9 @@
 import {extgcd} from '../utils';
 
 /**
- * Encoding method
+ * Encoding method (both numbers must be co-prime)
  * @param value which is always number
- * @param salt (seed) which can be anything
+ * @param saltNum (seed) must be a RSA number from (https://bigprimes.org/RSA-challenge)[50bit]
  * @constructor
  */
 export function ModInvEncode(value: number, saltNum: number): number {
@@ -11,9 +11,9 @@ export function ModInvEncode(value: number, saltNum: number): number {
 }
 
 /**
- * Decoding method
+ * Decoding method (both numbers must be co-prime)
  * @param value which is encoding result number
- * @param salt (seed) which can be anything
+ * @param saltNum  (seed) must be a RSA number from (https://bigprimes.org/RSA-challenge)[50bit]
  * @constructor
  */
 export function ModInvDecode(value: number, saltNum: number): number {
