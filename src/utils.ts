@@ -60,13 +60,13 @@ export function KoblitzEncode(salt: string): number {
 
 /**
  * Returns koblitz decoding for a string
- * @param salt must be a string to encode
+ * @param hash must be a string to encode
  * @constructor
  */
 export function KoblitzDecode(hash: number): string {
-    var plainSalt = '';
+    let plainSalt = '';
     while(hash > 0){
-        var numVal = hash % 63;
+        const numVal = hash % 63;
         plainSalt += RetNumCharVal(numVal);
         hash = Math.floor(hash / 63);
     }
