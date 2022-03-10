@@ -7,7 +7,10 @@ import {KoblitzEncode} from '../utils';
  * @constructor
  */
 export function SKoblitzEncode(value: number, salt: string): number {
-    console.log(KoblitzEncode(salt));
+    var pos = value % salt.length - 1;
+    var newSalt = salt.slice(0,pos) + value + salt.slice(pos);
+    console.log(newSalt);
+    console.log(KoblitzEncode(newSalt));
     return 0;
 }
 

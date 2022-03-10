@@ -24,6 +24,11 @@ export function RetCharNumVal(char: any): number {
     return 0;
 }
 
+/**
+ * Returns koblitz encoding for a string
+ * @param salt must be a string to encode
+ * @constructor
+ */
 export function KoblitzEncode(salt: string): number {
     salt = salt.toUpperCase();
     const chars = salt.split("").reverse();

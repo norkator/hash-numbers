@@ -1,11 +1,11 @@
 'use strict'
 
 import {GetFix} from './utils';
-import {KoblitzDecode, KoblitzEncode} from './algorithms/koblitz';
+import {KoblitzArithematicEncode, KoblitzArithematicDecode} from './algorithms/koblitzarithematic';
 import {DefaultDecode, DefaultEncode} from './algorithms/default';
 import { SKoblitzEncode, SKoblitzDecode } from './algorithms/skoblitz';
 
-export type ALGORITHM = 'DEFAULT' | 'KOBLITZ' | 'SKOBLITZ';
+export type ALGORITHM = 'DEFAULT' | 'KOBLITZARITHEMATIC' | 'SKOBLITZ';
 
 export interface HashParamsInterface {
     algorithm: ALGORITHM;
@@ -27,8 +27,8 @@ export class HashNumbers {
             case 'DEFAULT':
                 result = DefaultEncode(value, this.params.salt);
                 break;
-            case 'KOBLITZ':
-                result = KoblitzEncode(value, this.params.salt);
+            case 'KOBLITZARITHEMATIC':
+                result = KoblitzArithematicEncode(value, this.params.salt);
                 break;
             case 'SKOBLITZ':
                 result = SKoblitzEncode(value, this.params.salt);
@@ -43,8 +43,8 @@ export class HashNumbers {
             case "DEFAULT":
                 n = DefaultDecode(n, this.params.salt);
                 break;
-            case "KOBLITZ":
-                n = KoblitzDecode(n, this.params.salt);
+            case "KOBLITZARITHEMATIC":
+                n = KoblitzArithematicDecode(n, this.params.salt);
                 break;
             case "SKOBLITZ":
                 n = SKoblitzDecode(n, this.params.salt)
