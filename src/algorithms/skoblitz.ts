@@ -7,8 +7,8 @@ import {KoblitzDecode, KoblitzEncode} from '../utils';
  * @constructor
  */
 export function SKoblitzEncode(value: number, salt: string): string {
-    var pos = value % salt.length;
-    var saltedValue = salt.slice(0, pos) + value + salt.slice(pos);
+    const pos = value % salt.length;
+    const saltedValue = salt.slice(0, pos) + value + salt.slice(pos);
     // console.log(saltedValue)
     return KoblitzEncode(saltedValue).toLocaleString('fullwide', {useGrouping: false});
 }
@@ -20,10 +20,10 @@ export function SKoblitzEncode(value: number, salt: string): string {
  * @constructor
  */
 export function SKoblitzDecode(value: number, salt: string): number {
-    var saltedValue = KoblitzDecode(value);
+    const saltedValue = KoblitzDecode(value);
 
-    var id = 0;
-    var a = 0, b = 0;
+    let id = 0;
+    let a = 0, b = 0;
     while (a < salt.length) {
         if (salt[a] == saltedValue[b]) {
             a++;
