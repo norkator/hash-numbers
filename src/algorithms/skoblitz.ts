@@ -8,9 +8,9 @@ import {KoblitzDecode, KoblitzEncode} from '../utils';
  */
 export function SKoblitzEncode(value: number, salt: string): string {
     var pos = value % salt.length;
-    var saltedValue = salt.slice(0,pos) + value + salt.slice(pos);
+    var saltedValue = salt.slice(0, pos) + value + salt.slice(pos);
     // console.log(saltedValue)
-    return KoblitzEncode(saltedValue).toLocaleString('fullwide', {useGrouping:false}) ;
+    return KoblitzEncode(saltedValue).toLocaleString('fullwide', {useGrouping: false});
 }
 
 /**
@@ -21,14 +21,15 @@ export function SKoblitzEncode(value: number, salt: string): string {
  */
 export function SKoblitzDecode(value: number, salt: string): number {
     var saltedValue = KoblitzDecode(value);
-    
+
     var id = 0;
-    var a=0, b=0;
-    while(a<salt.length){
-        if(salt[a] == saltedValue[b]){
-            a++; b++;
+    var a = 0, b = 0;
+    while (a < salt.length) {
+        if (salt[a] == saltedValue[b]) {
+            a++;
+            b++;
         } else {
-            id = id*10 + Number(saltedValue[b]);
+            id = id * 10 + Number(saltedValue[b]);
             b++;
         }
     }

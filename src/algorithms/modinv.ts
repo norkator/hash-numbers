@@ -7,7 +7,7 @@ import {extgcd} from '../utils';
  * @constructor
  */
 export function ModInvEncode(value: number, saltNum: number): number {
-    return (extgcd(value,saltNum).x < 0)?(extgcd(value,saltNum).x + saltNum) % saltNum:extgcd(value,saltNum).x;
+    return (extgcd(value, saltNum).x < 0) ? (extgcd(value, saltNum).x + saltNum) % saltNum : extgcd(value, saltNum).x;
 }
 
 /**
@@ -17,5 +17,5 @@ export function ModInvEncode(value: number, saltNum: number): number {
  * @constructor
  */
 export function ModInvDecode(value: number, saltNum: number): number {
-    return (extgcd(value,saltNum).x < 0)?(extgcd(value,saltNum).x + saltNum) % saltNum:extgcd(value,saltNum).x;
+    return (extgcd(value, saltNum).x < 0) ? (extgcd(value, saltNum).x + saltNum) % saltNum : extgcd(value, saltNum).x;
 }

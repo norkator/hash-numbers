@@ -3,8 +3,8 @@
 import {GetFix} from './utils';
 import {KoblitzArithematicEncode, KoblitzArithematicDecode} from './algorithms/koblitzarithematic';
 import {DefaultDecode, DefaultEncode} from './algorithms/default';
-import { SKoblitzEncode, SKoblitzDecode } from './algorithms/skoblitz';
-import { ModInvDecode, ModInvEncode } from './algorithms/modinv';
+import {SKoblitzEncode, SKoblitzDecode} from './algorithms/skoblitz';
+import {ModInvDecode, ModInvEncode} from './algorithms/modinv';
 
 export type ALGORITHM = 'DEFAULT' | 'KOBLITZARITHEMATIC' | 'SKR_KOBLITZ_ALGO' | 'MOD_INV';
 
