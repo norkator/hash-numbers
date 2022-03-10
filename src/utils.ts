@@ -23,3 +23,15 @@ export function RetCharNumVal(char: any): number {
     }
     return 0;
 }
+
+export function KoblitzEncode(salt: string): number {
+    salt = salt.toUpperCase();
+    const chars = salt.split("").reverse();
+
+    let sum = 0;
+    chars.forEach((c, i) => {
+        const n = RetCharNumVal(c);
+        sum = sum + (n * Math.pow(36, i));
+    });
+    return sum;
+}

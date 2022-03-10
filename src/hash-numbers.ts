@@ -3,8 +3,9 @@
 import {GetFix} from './utils';
 import {KoblitzDecode, KoblitzEncode} from './algorithms/koblitz';
 import {DefaultDecode, DefaultEncode} from './algorithms/default';
+import { SKoblitzEncode, SKoblitzDecode } from './algorithms/skoblitz';
 
-export type ALGORITHM = 'DEFAULT' | 'KOBLITZ';
+export type ALGORITHM = 'DEFAULT' | 'KOBLITZ' | 'SKOBLITZ';
 
 export interface HashParamsInterface {
     algorithm: ALGORITHM;
@@ -29,6 +30,9 @@ export class HashNumbers {
             case 'KOBLITZ':
                 result = KoblitzEncode(value, this.params.salt);
                 break;
+            case 'SKOBLITZ':
+                result = SKoblitzEncode(value, this.params.salt);
+                break;
         }
         return GetFix(this.params.prefix) + result + GetFix(this.params.suffix);
     }
@@ -41,6 +45,9 @@ export class HashNumbers {
                 break;
             case "KOBLITZ":
                 n = KoblitzDecode(n, this.params.salt);
+                break;
+            case "SKOBLITZ":
+                n = SKoblitzDecode(n, this.params.salt)
                 break;
         }
         return n;
