@@ -1,17 +1,16 @@
 'use strict'
 
-import {GetFix} from './utils';
+import {GetPrefixSuffix, RemovePrefixSuffix} from './utils';
 import {KoblitzArithematicEncode, KoblitzArithematicDecode} from './algorithms/koblitzarithematic';
-import {DefaultDecode, DefaultEncode} from './algorithms/default';
+import {CRC32Decode, CRC32Encode} from './algorithms/crc32';
 import {SKoblitzEncode, SKoblitzDecode} from './algorithms/skoblitz';
 import {ModInvDecode, ModInvEncode} from './algorithms/modinv';
 
-export type ALGORITHM = 'DEFAULT' | 'KOBLITZARITHEMATIC' | 'SKR_KOBLITZ_ALGO' | 'MOD_INV';
+export type ALGORITHM = 'CRC32' | 'KOBLITZARITHEMATIC' | 'SKR_KOBLITZ_ALGO' | 'MOD_INV';
 
 export interface HashParamsInterface {
     algorithm: ALGORITHM;
-    salt: string;
-    saltNum: number;
+    salt: string | number;
     prefix?: string; // appended at beginning before number hash
     suffix?: string; // appended at the end after number hash
 }
@@ -26,36 +25,40 @@ export class HashNumbers {
     public encode(value: number): string {
         let result;
         switch (this.params.algorithm) {
-            case 'DEFAULT':
-                result = DefaultEncode(value, this.params.salt);
+            case 'CRC32':
+                result = CRC32Encode(value, String(this.params.salt));
                 break;
             case 'KOBLITZARITHEMATIC':
-                result = KoblitzArithematicEncode(value, this.params.salt);
+                result = KoblitzArithematicEncode(value, String(this.params.salt));
                 break;
             case 'SKR_KOBLITZ_ALGO':
-                result = SKoblitzEncode(value, this.params.salt);
+                result = SKoblitzEncode(value, String(this.params.salt));
                 break;
             case 'MOD_INV':
-                result = ModInvEncode(value, this.params.saltNum);
+                result = ModInvEncode(value, Number(this.params.salt));
                 break;
         }
-        return GetFix(this.params.prefix) + result + GetFix(this.params.suffix);
+        return GetPrefixSuffix(this.params.prefix) + result + GetPrefixSuffix(this.params.suffix);
     }
 
     public decode(value: string): number {
-        let n = Number(value); // todo... remove prefix, suffix first
+        let n = RemovePrefixSuffix(
+            GetPrefixSuffix(this.params.prefix),
+            GetPrefixSuffix(this.params.suffix),
+            value
+        );
         switch (this.params.algorithm) {
-            case "DEFAULT":
-                n = DefaultDecode(n, this.params.salt);
+            case "CRC32":
+                n = CRC32Decode(n, String(this.params.salt));
                 break;
             case "KOBLITZARITHEMATIC":
-                n = KoblitzArithematicDecode(n, this.params.salt);
+                n = KoblitzArithematicDecode(n, String(this.params.salt));
                 break;
             case "SKR_KOBLITZ_ALGO":
-                n = SKoblitzDecode(n, this.params.salt);
+                n = SKoblitzDecode(n, String(this.params.salt));
                 break;
             case "MOD_INV":
-                n = ModInvDecode(n, this.params.saltNum);
+                n = ModInvDecode(n, Number(this.params.salt));
                 break;
         }
         return n;
