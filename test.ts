@@ -1,15 +1,14 @@
 import {HashNumbers, HashParamsInterface} from './src/hash-numbers'
 
 const params: HashParamsInterface = {
-    algorithm: 'MOD_INV',
+    algorithm: 'CRC32',
     salt: 'Test123',
-    saltNum: 918693761380649,
-    prefix: '',
+    prefix: 'HN-',
     suffix: ''
 }
 const hashNumber = new HashNumbers(params);
 
-for (let i = 1; i < 1000000; i++) {
+for (let i = 1; i < 20; i++) {
     const encoded = hashNumber.encode(i);
     const decoded = hashNumber.decode(encoded);
     console.log(encoded + ' / ' + decoded);
