@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon",
     "lint": "eslint './src/**/*.{js,ts,tsx}'",
-    "test": "TS_NODE_PROJECT='./tsconfig.json' mocha --reporter spec --require ts-node/register src/**/*.test.ts --forbid-only --bail"
+    "test": "TS_NODE_PROJECT='./tsconfig.json' mocha --reporter spec --require ts-node/register src/**/*.test.ts --forbid-only --bail",
+    "build": "tsc --build"
   },
   "devDependencies": {
     "@types/chai": "4.3.0",
