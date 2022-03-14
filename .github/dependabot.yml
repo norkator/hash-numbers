@@ -1,0 +1,8 @@
+version: 2
+updates:
+
+  # To have up to date dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
