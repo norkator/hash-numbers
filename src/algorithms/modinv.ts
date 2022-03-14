@@ -27,7 +27,7 @@ export function ModInvDecode(value: number, saltNum: number): number {
  */
 function extGcd(a: number, b: number): any {
     if (a < b) {
-        let tmp = extGcd(b, a);
+        const tmp = extGcd(b, a);
         return {gcd: tmp.gcd, x: tmp.y, y: tmp.x};
     }
 
@@ -35,8 +35,8 @@ function extGcd(a: number, b: number): any {
         return {gcd: a, x: 1, y: 0};
     }
 
-    let r = a % b;
-    let tmp = extGcd(b, r);
+    const r = a % b;
+    const tmp = extGcd(b, r);
 
     return {gcd: tmp.gcd, x: tmp.y, y: (tmp.x - Math.floor(a / b) * tmp.y)};
 }
