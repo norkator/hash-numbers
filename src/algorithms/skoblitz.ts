@@ -1,5 +1,3 @@
-import {KoblitzDecode, KoblitzEncode} from '../utils';
-
 /**
  * Encoding method
  * @param value which is always number
@@ -35,3 +33,73 @@ export function SKoblitzDecode(value: number, salt: string): number {
     }
     return id;
 }
+
+/**
+ * Returns koblitz encoding for a string
+ * @param salt must be a string to encode
+ * @constructor
+ */
+function KoblitzEncode(salt: string): number {
+    const chars = salt.split("").reverse();
+
+    let sum = 0;
+    chars.forEach((c, i) => {
+        const n = RetCharNumVal(c);
+        sum = sum + (n * Math.pow(63, i));
+    });
+    return sum;
+}
+
+/**
+ * Returns numerical value for character (a-z,A-Z,0-9) => (1-26,27-52,53-62)
+ * @param char must be a character
+ * @constructor
+ */
+function RetCharNumVal(char: any): number {
+    if ((/[a-z]/).test(char)) {
+        return char.charCodeAt(0) - 96;
+    }
+    if ((/[A-Z]/).test(char)) {
+        return char.charCodeAt(0) - 38;
+    }
+    if ((/[0-9]/).test(char)) {
+        return char.charCodeAt(0) + 5;
+    }
+    return 0;
+}
+
+
+/**
+ * Returns koblitz decoding for a string
+ * @param hash must be a string to encode
+ * @constructor
+ */
+function KoblitzDecode(hash: number): string {
+    let plainSalt = '';
+    while (hash > 0) {
+        const numVal = hash % 63;
+        plainSalt += RetNumCharVal(numVal);
+        hash = Math.floor(hash / 63);
+    }
+    return plainSalt.split('').reverse().join('');
+}
+
+
+/**
+ * Returns character value for number (1-26,27-52,53-62) => (a-z,A-Z,0-9)
+ * @param num must be a number
+ * @constructor
+ */
+function RetNumCharVal(num: number): any {
+    if (num >= 1 && num <= 26) {
+        return String.fromCharCode(num + 96);
+    }
+    if (num >= 27 && num <= 52) {
+        return String.fromCharCode(num + 38);
+    }
+    if (num >= 53 && num <= 62) {
+        return String.fromCharCode(num - 5);
+    }
+    return 0;
+}
+

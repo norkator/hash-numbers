@@ -12,7 +12,7 @@ const hashNumber = new HashNumbers(params);
 let arr: number[] = []
 
 
-for (let i = 1; i < 1000000; i++) {
+for (let i = 1; i < 10000; i++) {
     const encoded = hashNumber.encode(i);
     arr.push(Number(encoded));
     const decoded = hashNumber.decode(encoded);
