@@ -8,7 +8,7 @@ const params: HashParamsInterface = {
     suffix: ''
 }
 
-let arr: number[] = [];
+const arr: number[] = [];
 
 const expect = chai.expect;
 describe('hash-numbers', async () => {
