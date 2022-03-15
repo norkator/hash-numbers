@@ -8,7 +8,3 @@ back to original number.
 * Prefix and suffix option.
 * Salted/seeded encoding result.
 * ALGORITHM option to support more future ideas.
-
-
-### Todo
-* Release as npm package.
