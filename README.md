@@ -9,7 +9,7 @@ pipeline will automatically package and upload a new version.
 ### Usage
 
 ```javascript
-const HashNumber = require("hash-numbers");
+const HashNumber = require("hash-numbers").default;
 const hashNumber = new HashNumber({
     algorithm: 'DEFAULT',
     salt: 'Czb8ZQja',
