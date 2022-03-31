@@ -1,13 +1,11 @@
 'use strict'
 
 import {GetPrefixSuffix, RemovePrefixSuffix} from './utils';
-import {KoblitzArithmeticEncode, KoblitzArithmeticDecode} from './algorithms/koblitzarithematic';
 import {CRC32Decode, CRC32Encode} from './algorithms/crc32';
 import {SKoblitzEncode, SKoblitzDecode} from './algorithms/skoblitz';
-import {ModInvDecode, ModInvEncode} from './algorithms/modinv';
 import {DefaultDecode, DefaultEncode} from "./algorithms/default";
 
-export type ALGORITHM = 'DEFAULT' | 'CRC32' | 'KOBLITZ_ARITHMETIC' | 'SKR_KOBLITZ_ALGO' | 'MOD_INV';
+export type ALGORITHM = 'DEFAULT' | 'CRC32' | 'SKR_KOBLITZ_ALGO';
 
 export interface HashParamsInterface {
     algorithm: ALGORITHM;
@@ -32,14 +30,8 @@ export default class Index {
             case 'CRC32':
                 result = CRC32Encode(value, String(this.params.salt));
                 break;
-            case 'KOBLITZ_ARITHMETIC':
-                result = KoblitzArithmeticEncode(value, String(this.params.salt));
-                break;
             case 'SKR_KOBLITZ_ALGO':
                 result = SKoblitzEncode(value, String(this.params.salt));
-                break;
-            case 'MOD_INV':
-                result = ModInvEncode(value, Number(this.params.salt));
                 break;
         }
         return GetPrefixSuffix(this.params.prefix) + result + GetPrefixSuffix(this.params.suffix);
@@ -58,14 +50,8 @@ export default class Index {
             case "CRC32":
                 n = CRC32Decode(n, String(this.params.salt));
                 break;
-            case "KOBLITZ_ARITHMETIC":
-                n = KoblitzArithmeticDecode(n, String(this.params.salt));
-                break;
             case "SKR_KOBLITZ_ALGO":
                 n = SKoblitzDecode(n, String(this.params.salt));
-                break;
-            case "MOD_INV":
-                n = ModInvDecode(n, Number(this.params.salt));
                 break;
         }
         return n;
