@@ -1,7 +1,10 @@
 # hash-numbers
 
 Goal is to turn incrementing numbers into harder to guess numbers. Big plus would be to be able to decode encoded result
-back to original number.
+back to original number. New methods are very welcome.
+
+This repository has npm release pipeline configuration. When new release tag is made, 
+pipeline will automatically package and upload a new version.
 
 ### Usage
 
