@@ -12,7 +12,3 @@ export function ToCharCodeArray(value: string): number[] {
     return Array.from(value, (x) => x.charCodeAt(0));
 }
 
-export function CharCodeToChar(value: number): string {
-    return String.fromCharCode(value);
-}
-
