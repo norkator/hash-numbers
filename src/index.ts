@@ -5,8 +5,9 @@ import {KoblitzArithmeticEncode, KoblitzArithmeticDecode} from './algorithms/kob
 import {CRC32Decode, CRC32Encode} from './algorithms/crc32';
 import {SKoblitzEncode, SKoblitzDecode} from './algorithms/skoblitz';
 import {ModInvDecode, ModInvEncode} from './algorithms/modinv';
+import {DefaultDecode, DefaultEncode} from "./algorithms/default";
 
-export type ALGORITHM = 'CRC32' | 'KOBLITZARITHEMATIC' | 'SKR_KOBLITZ_ALGO' | 'MOD_INV';
+export type ALGORITHM = 'DEFAULT' | 'CRC32' | 'KOBLITZ_ARITHMETIC' | 'SKR_KOBLITZ_ALGO' | 'MOD_INV';
 
 export interface HashParamsInterface {
     algorithm: ALGORITHM;
@@ -25,10 +26,13 @@ export default class Index {
     public encode(value: number): string {
         let result;
         switch (this.params.algorithm) {
+            case 'DEFAULT':
+                result = DefaultEncode(value, String(this.params.salt));
+                break;
             case 'CRC32':
                 result = CRC32Encode(value, String(this.params.salt));
                 break;
-            case 'KOBLITZARITHEMATIC':
+            case 'KOBLITZ_ARITHMETIC':
                 result = KoblitzArithmeticEncode(value, String(this.params.salt));
                 break;
             case 'SKR_KOBLITZ_ALGO':
@@ -48,10 +52,13 @@ export default class Index {
             value
         );
         switch (this.params.algorithm) {
+            case 'DEFAULT':
+                n = DefaultDecode(n, String(this.params.salt));
+                break;
             case "CRC32":
                 n = CRC32Decode(n, String(this.params.salt));
                 break;
-            case "KOBLITZARITHEMATIC":
+            case "KOBLITZ_ARITHMETIC":
                 n = KoblitzArithmeticDecode(n, String(this.params.salt));
                 break;
             case "SKR_KOBLITZ_ALGO":
