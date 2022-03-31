@@ -7,3 +7,8 @@ export function RemovePrefixSuffix(prefix: string, suffix: string, value: string
         value.replace(prefix, '').replace(suffix, '')
     );
 }
+
+export function ToCharCodeArray(value: string): number[] {
+    return Array.from(value, (x) => x.charCodeAt(0));
+}
+
