@@ -1,5 +1,5 @@
 import * as chai from 'chai';
-import {Index, HashParamsInterface} from './index';
+import Index, {HashParamsInterface} from './index';
 
 const params: HashParamsInterface = {
     algorithm: 'CRC32',
