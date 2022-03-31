@@ -1,3 +1,7 @@
+import {ToCharCodeArray} from '../utils';
+
+const sumReducer = (accumulator: number, curr: number) => accumulator + curr;
+
 /**
  * Encoding method
  * @param value which is always number
@@ -5,7 +9,7 @@
  * @constructor
  */
 export function DefaultEncode(value: number, salt: string): number {
-    return 123;
+    return Number(run(value, salt, false));
 }
 
 /**
@@ -15,5 +19,13 @@ export function DefaultEncode(value: number, salt: string): number {
  * @constructor
  */
 export function DefaultDecode(value: number, salt: string): number {
-    return -1;
+    return Number(run(value, salt, true));
+}
+
+
+function run(value: number, salt: string, reverse = false): string {
+    let result = "";
+    const saltArray = ToCharCodeArray(salt);
+    const saltSum = saltArray.reduce(sumReducer);
+    return reverse ? String(value / saltSum) : String(value * saltSum);
 }

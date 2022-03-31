@@ -8,11 +8,13 @@ back to original number.
 ```javascript
 const HashNumber = require("hash-numbers");
 const hashNumber = new HashNumber({
-    algorithm: 'CRC32',
-    salt: 'something1234',
+    algorithm: 'DEFAULT',
+    salt: 'rvQAyZG4',
     prefix: 'HN-'
 });
 console.log(hashNumber.encode(1));
+console.log(hashNumber.encode(2));
+console.log(hashNumber.encode(3));
 ```
 
 ### Features

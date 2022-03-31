@@ -1,7 +1,7 @@
 import * as chai from 'chai';
-import Index, {HashParamsInterface} from './index';
+import Index, {HashParamsInterface} from '../index';
 
-const params: HashParamsInterface = {
+const crc32Params: HashParamsInterface = {
     algorithm: 'CRC32',
     salt: 'Test123',
     prefix: '',
@@ -11,10 +11,10 @@ const params: HashParamsInterface = {
 const arr: number[] = [];
 
 const expect = chai.expect;
-describe('hash-numbers', async () => {
+describe('crc32', async () => {
 
-    it('should generate CRC32 ids', async () => {
-        const hashNumber = new Index(params);
+    it('should generate ids', async () => {
+        const hashNumber = new Index(crc32Params);
         for (let i = 1; i < 10000; i++) {
             const encoded = hashNumber.encode(i);
             arr.push(Number(encoded));
