@@ -15,7 +15,7 @@ export interface HashParamsInterface {
     suffix?: string; // appended at the end after number hash
 }
 
-export class HashNumbers {
+export class Index {
     private params: HashParamsInterface;
 
     constructor(params: HashParamsInterface) {
