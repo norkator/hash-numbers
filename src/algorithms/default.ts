@@ -24,7 +24,6 @@ export function DefaultDecode(value: number, salt: string): number {
 
 
 function run(value: number, salt: string, reverse = false): string {
-    let result = "";
     const saltArray = ToCharCodeArray(salt);
     const saltSum = saltArray.reduce(sumReducer);
     return reverse ? String(value / saltSum) : String(value * saltSum);
