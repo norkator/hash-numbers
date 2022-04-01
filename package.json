@@ -3,6 +3,9 @@
   "version": "0.6.0",
   "license": "MIT",
   "homepage": "https://github.com/norkator/hash-numbers#readme",
+  "bugs": {
+    "url": "https://github.com/norkator/hash-numbers/issues"
+  },
   "main": "dist/lib/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/lib/index.d.ts",
