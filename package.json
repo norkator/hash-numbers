@@ -1,6 +1,6 @@
 {
   "name": "hash-numbers",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "license": "MIT",
   "homepage": "https://github.com/norkator/hash-numbers#readme",
   "bugs": {
@@ -18,15 +18,15 @@
     "build:esm": "tsc -p tsconfig.esm.json"
   },
   "devDependencies": {
-    "@types/chai": "4.3.0",
-    "nodemon": "2.0.15",
+    "@types/chai": "4.3.1",
+    "nodemon": "2.0.16",
     "ts-node": "10.7.0",
-    "typescript": "4.6.3",
-    "@typescript-eslint/eslint-plugin": "5.17.0",
-    "@typescript-eslint/parser": "5.17.0",
-    "@types/mocha": "9.1.0",
-    "eslint": "8.12.0",
-    "mocha": "9.2.2",
+    "typescript": "4.6.4",
+    "@typescript-eslint/eslint-plugin": "5.22.0",
+    "@typescript-eslint/parser": "5.22.0",
+    "@types/mocha": "9.1.1",
+    "eslint": "8.14.0",
+    "mocha": "10.0.0",
     "chai": "4.3.6"
   },
   "files": [
