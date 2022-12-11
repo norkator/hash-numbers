@@ -1,4 +1,4 @@
-name: Node.js Package
+name: Publish image and deploy
 
 on:
   # push:
@@ -10,10 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v2.5.0
+      - uses: actions/setup-node@v3.5.1
         with:
-          node-version: 16
+          node-version: 18
       - run: npm install
       - run: npm run lint
       - run: npm run test
@@ -23,10 +23,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v2.5.0
+      - uses: actions/setup-node@v3.5.1
         with:
-          node-version: 16
+          node-version: 18
           registry-url: https://registry.npmjs.org/
       - run: npm install
       - run: npm run build
