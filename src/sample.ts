@@ -8,7 +8,7 @@ const params: HashParamsInterface = {
 }
 const hashNumber = new Index(params);
 
-let arr: number[] = []
+const arr: number[] = []
 
 for (let i = 1; i < 10; i++) {
     const encoded = hashNumber.encode(i);
